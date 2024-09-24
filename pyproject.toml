@@ -58,7 +58,7 @@ build-backend = "hatchling.build"
 include= ["conda_rocker"]
 
 [project.entry-points."rocker.extensions"]
-rocker_extension = "conda_rocker.rocker_extension:NewRockerExtension"
+conda_extension = "conda_rocker.conda_extension:CondaExtension"
 
 # Environments
 [tool.pixi.environments]
