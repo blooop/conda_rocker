@@ -11,7 +11,7 @@ class CondaExtension(RockerExtension):
         self.name = CondaExtension.get_name()
 
     # def get_snippet(self, cliargs):
-        # return pkgutil.get_data("conda_rocker", "templates/curl_snippet.Dockerfile").decode("utf-8")
+    # return pkgutil.get_data("conda_rocker", "templates/curl_snippet.Dockerfile").decode("utf-8")
 
     def get_snippet(self, cliargs):
         return pkgutil.get_data(
