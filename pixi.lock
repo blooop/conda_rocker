@@ -686,9 +686,9 @@ packages:
   requires_python: '>=3.7'
 - kind: pypi
   name: conda-rocker
-  version: 0.0.1
+  version: 0.0.2
   path: .
-  sha256: eb0359a0cadbf4b6479e83f6cc1901581eb68bbea319c4ea86735f7893c9e7d6
+  sha256: caf197023a191c08306b50c9c4f46156ad3c1cb40e981401c3d851eb32bc58d5
   requires_dist:
   - rocker>=0.2.17
   - black>=23,<=24.8.0 ; extra == 'test'
