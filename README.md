@@ -30,8 +30,8 @@ To install conda in an image use the `--conda` flag
 
 ```
 #add conda to the ubuntu:22.04 image
-rocker --conda ubuntu:22.04
+rocker --conda --user ubuntu:22.04
 
 # add conda to the nvidia/cuda image
-rocker --conda nvidia/cuda
+rocker --conda --user nvidia/cuda
 ```
