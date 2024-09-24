@@ -14,89 +14,25 @@
 
 ## Intro
 
-This a template for creating [rocker](https://github.com/tfoote/rocker) extensions.  It used [off-your-rocker](https://github.com/sloretz/off-your-rocker) as a starting point, and migrated to use `pyproject.toml` instead of `setup.py` to help manage the development environment and continuous integration in a modern way using [pixi](https://pixi.sh).  [Pixi](https://github.com/prefix-dev/pixi) is a cross-platform package manager based on the conda ecosystem.  It provides a simple and performant way of reproducing a development environment and running user defined tasks and worflows.  It more lightweight than docker, but does not provide the same level of isolation or generality.
+This is a [rocker](https://github.com/tfoote/rocker) extension for adding [conda](https://github.com/conda/conda) to an existing docker image.  Check out the [rocker](https://github.com/osrf/rocker) GitHub page for more details on how Rocker and its extensions work. In short, Rocker allows you to add custom capabilities to existing Docker containers.
 
-This has basic setup for
+The installer uses [miniforge](https://github.com/conda-forge/miniforge) instead of conda as it's a lightweight and [free](https://stackoverflow.com/questions/60532678/what-is-the-difference-between-miniconda-and-miniforge). 
 
-* pylint
-* ruff
-* black
-* pytest
-* git-lfs
-* basic github actions ci
-* pulling updates from this template
-* codecov
-* pypi upload
-* dependabot
 
-# Install
+## Installation
 
-1. Use github to use this project as a template
-2. Clone the project and run, `scripts/update_from_template.sh` and then run the `scripts/rename_project.sh` to rename the project.
-
-If you are using pixi, look at the available tasks in pyproject.toml.  If you are new to pixi follow the instructions on the pixi [website](https://prefix.dev/)
-
-# Github setup
-
-There are github workflows for CI, codecov and automated pypi publishing in `ci.yml` and `publish.yml`.
-
-ci.yml uses pixi tasks to set up the environment matrix and run the various CI tasks. To set up codecov on github, you need to get a `CODECOV_TOKEN` and add it to your actions secrets.
-
-publish.yml uses [pypy-auto-publish](https://github.com/marketplace/actions/python-auto-release-pypi-github) to automatically publish to pypi if the package version number changes. You need to add a `PYPI_API_TOKEN` to your github secrets to enable this.     
-
-If you use vscode to attach to your development container it makes it easier to set up specific extensions for each project that don't need to be installed globally. 
-
-# Development
-
-There are currently two ways of running code.  The preferred way is to use pixi to manage your environment and dependencies. 
-
-```bash
-$ cd project
-
-$ pixi run ci
-$ pixi run arbitrary_task
+```
+pip install conda-rocker
 ```
 
-# Adding Functionality
+## Usage
 
-1. Rename conda_rocker/new_rocker_extension.py and the class inside to something more appropriate
-2. Update the extension entrypoint in `pyproject.toml` 
+To install conda in an image use the `--conda` flag
 
-    `[project.entry-points."rocker.extensions"]`
+```
+#add conda to the ubuntu:22.04 image
+rocker --conda ubuntu:22.04
 
-    `new_rocker_extension = "conda_rocker.new_rocker_extension:NewRockerExtension"`
-
-    
-    e.g.:
-    `lazygit = "lazygit_rocker.lazygit_rocker:LazygitExtension"`
-
-    
-3. Update the `get_name()` function in the extension class. e.g. Updating the name to `lazygit` would mean that it would be activated by passing --lazygit to rocker   
-   
-4. Add/update the docker snippets in the templates folder.  Officially the extension is supposed to be .Dockerfile.em to indicate it's passed to the empy library, but I have left them as .Dockerfile as I get Dockerfile highlighting out of the box that way. 
-5. Develop your extension.  I find that using `pip install -e .` and running the extension with rocker on my host system is the easiest way to get started.  
-
-    ```bash
-    rocker --lazygit ubuntu:22.04
-
-    #check that everything works as expected
-    ```
-    
-
-
-## Troubleshooting
-
-The main pixi tasks are related to CI.  Github actions runs the pixi task "ci".  The CI is mostly likey to fail from a lockfile mismatch.  Use `pixi run fix` to fix any lockfile related problems. 
-
-## vscode tasks
-
-There are two core tasks.  
-
-1. set \<cfg\> from active file
-
-    This sets \<cfg\> to the currently opened file in the editor
-
-2. run \<cfg\>
-
-    This runs python with the file set in \<cfg\>
-
+# add conda to the nvidia/cuda image
+rocker --conda nvidia/cuda
+```
