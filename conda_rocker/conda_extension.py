@@ -1,5 +1,6 @@
 import pkgutil
 from rocker.extensions import RockerExtension
+import typing
 
 
 class CondaExtension(RockerExtension):
@@ -19,7 +20,12 @@ class CondaExtension(RockerExtension):
         return pkgutil.get_data(
             "conda_rocker", "templates/{}_user_snippet.Dockerfile".format(self.name)
         ).decode("utf-8")
-        return pkgutil.get_data("conda_rocker", "templates/curl_snippet.Dockerfile").decode("utf-8")
+
+    def invoke_after(self, cliargs) -> typing.Set[str]:
+        return set(["user"])
+
+    def required(self, cliargs) -> typing.Set[str]:
+        return set(["user"])
 
     @staticmethod
     def register_arguments(parser, defaults=None):
