@@ -25,6 +25,6 @@ class CondaExtension(RockerExtension):
         parser.add_argument(
             f"--{CondaExtension.get_name()}",
             action="store_true",
-            default=defaults.get("new_rocker_extension"),
-            help="add new_rocker_extension to your docker image",
+            default=defaults.get("conda"),
+            help="add conda to your docker image",
         )

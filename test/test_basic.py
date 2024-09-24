@@ -7,16 +7,16 @@ from conda_rocker.conda_extension import CondaExtension
 
 class TestNewRockerExtension:
 
-    # Instantiating new_rocker_extensionExtension and verifying the name attribute is set correctly
+    # Instantiating condaExtension and verifying the name attribute is set correctly
     def test_name_attribute_initialization(self):
         extension = CondaExtension()
-        assert extension.name == "new_rocker_extension"
+        assert extension.name == "conda"
 
     def test_register_arguments(self):
         parser = argparse.ArgumentParser()
         CondaExtension.register_arguments(parser)
         args = parser.parse_args([])
-        assert "new_rocker_extension" in vars(args)
+        assert "conda" in vars(args)
 
     # Handling missing template files in get_snippet method
     def test_get_snippet_missing_template(self):
