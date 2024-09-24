@@ -11,13 +11,13 @@ class NewRockerExtension(RockerExtension):
         self.name = NewRockerExtension.get_name()
 
     def get_snippet(self, cliargs):
-        return pkgutil.get_data("template_rocker", "templates/curl_snippet.Dockerfile").decode(
+        return pkgutil.get_data("conda_rocker", "templates/curl_snippet.Dockerfile").decode(
             "utf-8"
         )
 
     def get_user_snippet(self, cliargs):
         return pkgutil.get_data(
-            "template_rocker", "templates/{}_snippet.Dockerfile".format(self.name)
+            "conda_rocker", "templates/{}_snippet.Dockerfile".format(self.name)
         ).decode("utf-8")
 
     @staticmethod
