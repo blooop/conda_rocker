@@ -1,6 +1,6 @@
 # Changelog
 
-## template_rocker
+## conda_rocker
 
 ## [0.0.0]
 
