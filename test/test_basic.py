@@ -5,7 +5,7 @@ from unittest.mock import patch
 from conda_rocker.conda_extension import CondaExtension
 
 
-class TestNewRockerExtension:
+class TestTemplateRocker:
 
     # Instantiating condaExtension and verifying the name attribute is set correctly
     def test_name_attribute_initialization(self):
